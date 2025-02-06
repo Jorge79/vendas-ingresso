@@ -1,0 +1,119 @@
+###
+# @name loginPartner1
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "partner1@user.com",
+  "password": "123456"
+}
+
+###
+@tokenPartner1 = {{ loginPartner1.response.body.token }}
+
+###
+# @name loginPartner2
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "partner2@user.com",
+  "password": "123456"
+}
+
+###
+@tokenPartner2 = {{ loginPartner2.response.body.token }}
+
+###
+# @name loginCustomer1
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "customer1@user.com",
+  "password": "123456"
+}
+
+###
+@tokenCustomer1 = {{ loginCustomer1.response.body.token }}
+
+### Partner 1
+POST http://localhost:3000/partners/register
+Content-Type: application/json
+
+{
+  "name": "Partner 1",
+  "email": "partner1@user.com",
+  "password": "123456",
+  "company_name": "Company 1"
+}
+
+### Partner 2
+POST http://localhost:3000/partners/register
+Content-Type: application/json
+
+{
+  "name": "Partner 2",
+  "email": "partner2@user.com",
+  "password": "123456",
+  "company_name": "Company 2"
+}
+
+###
+POST http://localhost:3000/customers/register
+Content-Type: application/json
+
+{
+  "name": "Customer 1",
+  "email": "customer1@user.com",
+  "password": "123456",
+  "address": "address test",
+  "phone": "5555555"
+}
+
+###
+POST http://localhost:3000/events
+Content-Type: application/json
+
+{
+  "name": "Event 1",
+  "description": "description test",
+  "date": "2025-01-01T00:00:00.000Z",
+  "location": "Rua X"
+}
+
+###
+POST http://localhost:3000/partners/events
+Content-Type: application/json
+Authorization: Bearer {{ tokenPartner1 }}
+
+{
+    "name": "Evento test 1",
+    "description": "descrição do evento",
+    "date": "2025-01-01T00:00:00",
+    "location": "Rua x, bairro etc"
+}
+
+###
+GET http://localhost:3000/partners/events
+Content-Type: application/json
+Authorization: Bearer {{ tokenPartner1 }}
+
+###
+GET http://localhost:3000/events
+Content-Type: application/json
+
+###
+GET http://localhost:3000/events/1
+Content-Type: application/json
+
+###
+GET http://localhost:3000/partners/events/1
+Authorization: Bearer {{ tokenPartner1 }}
+
+###
+GET http://localhost:3000/partners/events
+Content-Type: application/json
