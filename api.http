@@ -103,6 +103,16 @@ Content-Type: application/json
 Authorization: Bearer {{ tokenPartner1 }}
 
 ###
+POST http://localhost:3000/events/1/tickets
+Content-Type: application/json
+Authorization: Bearer {{ tokenPartner1 }}
+
+{
+    "num_tickets": 10,
+    "price": 100
+}
+
+###
 GET http://localhost:3000/events
 Content-Type: application/json
 
@@ -113,7 +123,3 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/partners/events/1
 Authorization: Bearer {{ tokenPartner1 }}
-
-###
-GET http://localhost:3000/partners/events
-Content-Type: application/json
