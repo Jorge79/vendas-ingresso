@@ -44,4 +44,8 @@ export class CustomerService {
       throw e;
     }
   }
+
+  async findByUserId(userId: number): Promise<CustomerModel | null> {
+    return CustomerModel.findByUserId(userId, { user: true });
+  }
 }

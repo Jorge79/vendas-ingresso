@@ -75,17 +75,6 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/events
-Content-Type: application/json
-
-{
-  "name": "Event 1",
-  "description": "description test",
-  "date": "2025-01-01T00:00:00.000Z",
-  "location": "Rua X"
-}
-
-###
 POST http://localhost:3000/partners/events
 Content-Type: application/json
 Authorization: Bearer {{ tokenPartner1 }}
@@ -113,6 +102,12 @@ Authorization: Bearer {{ tokenPartner1 }}
 }
 
 ###
+GET http://localhost:3000/events/1/tickets/1
+
+###
+GET http://localhost:3000/events/1/tickets
+
+###
 GET http://localhost:3000/events
 Content-Type: application/json
 
@@ -123,3 +118,13 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/partners/events/1
 Authorization: Bearer {{ tokenPartner1 }}
+
+###
+POST http://localhost:3000/purchases
+Content-Type: application/json
+Authorization: Bearer {{ tokenCustomer1 }}
+
+{
+    "ticket_ids": [1],
+    "card_token": "tok_visa"
+}

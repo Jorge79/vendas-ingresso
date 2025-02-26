@@ -70,6 +70,7 @@ export class TicketModel {
     );
     return tickets;
   }
+
   static async findById(id: number): Promise<TicketModel | null> {
     const db = Database.getInstance();
     const [rows] = await db.execute<RowDataPacket[]>(
@@ -78,6 +79,7 @@ export class TicketModel {
     );
     return rows.length ? new TicketModel(rows[0] as TicketModel) : null;
   }
+
   static async findAll(
     filter?: {
       where?: { event_id?: number; ids?: number[] };
@@ -103,6 +105,7 @@ export class TicketModel {
     const [rows] = await db.execute<RowDataPacket[]>(query, params);
     return rows.map((row) => new TicketModel(row as TicketModel));
   }
+
   async update(): Promise<void> {
     const db = Database.getInstance();
     const [result] = await db.execute<ResultSetHeader>(
@@ -113,6 +116,7 @@ export class TicketModel {
       throw new Error("Ticket not found");
     }
   }
+
   async delete(): Promise<void> {
     const db = Database.getInstance();
     const [result] = await db.execute<ResultSetHeader>(
@@ -123,6 +127,7 @@ export class TicketModel {
       throw new Error("Ticket not found");
     }
   }
+
   fill(data: Partial<TicketModel>): void {
     if (data.id !== undefined) this.id = data.id;
     if (data.location !== undefined) this.location = data.location;
